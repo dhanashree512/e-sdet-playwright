@@ -127,16 +127,16 @@ test.describe('Sauce Demo Login Page', () => {
 
   test.describe('UI Element Verification', () => {
     test('should verify all login form elements are visible', async ({ page }) => {
-      await expect(page.locator('[data-test="username"]')).toBeVisible();
-      await expect(page.locator('[data-test="password"]')).toBeVisible();
-      await expect(page.locator('[data-test="login-button"]')).toBeVisible();
+      await expect(page.locator(`[data-test="username"]`)).toBeVisible();
+      await expect(page.locator(`[data-test="password"]`)).toBeVisible();
+      await expect(page.locator(`[data-test="login-button"]`)).toBeVisible();
     });
 
     test('should verify login form elements have correct attributes', async ({ page }) => {
-      await expect(page.locator('[data-test="username"]')).toHaveAttribute('type', 'text');
-      await expect(page.locator('[data-test="password"]')).toHaveAttribute('type', 'password');
-      await expect(page.locator('[data-test="login-button"]')).toHaveAttribute('type', 'submit');
+      await expect(page.locator(`[data-test="username"]`)).toHaveAttribute('type', 'text');
+      await expect(page.locator(`[data-test="password"]`)).toHaveAttribute('type', 'password');
+      await expect(page.locator(`[data-test="login-button"]`)).toHaveAttribute('type', 'submit');
     });
 
     test('should verify error message container is not visible initially', async ({ page }) => {
-      await expect(page.locator('[data-test="error"]')).not.toBeVisible();
+      await expect(page.locator(`[data-test="error"]`)).not.toBeVisible();
