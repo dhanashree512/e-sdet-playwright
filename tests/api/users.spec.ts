@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
+// const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
 test.describe('Users API', () => {
 
   test.describe('GET /users', () => {
 
     test('should return 200 and a list of users', async ({ request }) => {
-      const response = await request.get(`${BASE_URL}/users`);
+      const response = await request.get(`/users`);
 
       expect(response.status()).toBe(200);
 
@@ -17,7 +17,7 @@ test.describe('Users API', () => {
     });
 
     test('should return correct user object structure', async ({ request }) => {
-      const response = await request.get(`${BASE_URL}/users`);
+      const response = await request.get(`/users`);
       const body = await response.json();
       const user = body[0];
 
@@ -29,7 +29,7 @@ test.describe('Users API', () => {
     });
 
     test('should return a single user by id', async ({ request }) => {
-      const response = await request.get(`${BASE_URL}/users/2`);
+      const response = await request.get(`/users/2`);
 
       expect(response.status()).toBe(200);
 
@@ -40,7 +40,7 @@ test.describe('Users API', () => {
     });
 
     test('should return 404 for non-existent user', async ({ request }) => {
-      const response = await request.get(`${BASE_URL}/users/9999`);
+      const response = await request.get(`/users/9999`);
       expect(response.status()).toBe(404);
     });
 
@@ -55,7 +55,7 @@ test.describe('Users API', () => {
         email: 'john@ensora.com',
       };
 
-      const response = await request.post(`${BASE_URL}/users`, {
+      const response = await request.post(`/users`, {
         data: payload,
       });
 
@@ -68,7 +68,7 @@ test.describe('Users API', () => {
     });
 
     test('should return id as a number when user is created', async ({ request }) => {
-      const response = await request.post(`${BASE_URL}/users`, {
+      const response = await request.post(`/users`, {
         data: { name: 'Jane', username: 'jane', email: 'jane@ensora.com' },
       });
 
@@ -87,7 +87,7 @@ test.describe('Users API', () => {
         email: 'johnupdated@ensora.com',
       };
 
-      const response = await request.put(`${BASE_URL}/users/2`, {
+      const response = await request.put(`/users/2`, {
         data: payload,
       });
 
@@ -103,7 +103,7 @@ test.describe('Users API', () => {
   test.describe('DELETE /users', () => {
 
     test('should delete a user and return 200', async ({ request }) => {
-      const response = await request.delete(`${BASE_URL}/users/2`);
+      const response = await request.delete(`/users/2`);
       expect(response.status()).toBe(200);
     });
 

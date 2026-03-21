@@ -37,7 +37,7 @@ export default defineConfig({
       name: 'api',
       testDir: './tests/api',
       use: {
-        baseURL: process.env.API_BASE_URL || 'https://reqres.in',
+        baseURL: process.env.API_BASE_URL || 'https://jsonplaceholder.typicode.com',
       },
     },
   ],

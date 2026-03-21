@@ -1,3 +1,11 @@
+# The file .github/workflows/playwright.yml is used to define 
+# an automated Continuous Integration (CI) workflow within
+# GitHub Actions that runs Playwright end-to-end (E2E) tests on every code change.
+
+# // The .vscode/mcp.json file is a configuration file used in 
+# // Visual Studio Code to define and manage Model Context Protocol (MCP) servers,
+# // which extend the capabilities of AI assistants like GitHub Copilot.
+
 name: Playwright Tests
 on:
   push:
