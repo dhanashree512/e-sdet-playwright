@@ -1,35 +1,47 @@
-# The file .github/workflows/playwright.yml is used to define 
-# an automated Continuous Integration (CI) workflow within
-# GitHub Actions that runs Playwright end-to-end (E2E) tests on every code change.
-
-# // The .vscode/mcp.json file is a configuration file used in 
-# // Visual Studio Code to define and manage Model Context Protocol (MCP) servers,
-# // which extend the capabilities of AI assistants like GitHub Copilot.
-
 name: Playwright Tests
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run BDD Cucumber tests
+        run: npm run test:bdd
+
+      - name: Upload Cucumber report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cucumber-report
+          path: cucumber-report.html
+          retention-days: 30
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
